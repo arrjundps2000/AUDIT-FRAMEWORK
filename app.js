@@ -54,7 +54,7 @@ app.use(passport.session());
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/secrets",
+    callbackURL: "https://audit-framework.herokuapp.com/auth/google/secrets",
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({ googleId: profile.id, username: profile.displayName }, function (err, user) {
@@ -322,7 +322,7 @@ app.post("/api_update", function (req, res) {
     var stock_type=req.body.stockType;
     var start = new Date();
     var stock ={"id":stock_id, "name":stock_name, "type":stock_type, "price":stock_price, "values":stock_quantity};
-    axios.put('http://localhost:8080/stocks/', stock)
+    axios.put('http://enigmaapp-env-1.eba-5fsstvxk.ap-south-1.elasticbeanstalk.com/stocks/', stock)
     .then(function (response) {
         console.log(response.data);  
     }
