@@ -358,7 +358,7 @@ app.get("/logout", function(req, res) {
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile'] }));
 
-app.get('/auth/google/secrets', 
+app.get('/auth/google/audit', 
 passport.authenticate('google', { failureRedirect: '/login' }),
 function(req, res) {
 res.redirect('/apiList');
