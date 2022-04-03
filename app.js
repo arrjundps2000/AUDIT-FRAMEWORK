@@ -54,7 +54,7 @@ app.use(passport.session());
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "https://audit-framework.herokuapp.com/auth/google/secrets",
+    callbackURL: "https://audit-framework.herokuapp.com/auth/google/audit",
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({ googleId: profile.id, username: profile.displayName }, function (err, user) {
