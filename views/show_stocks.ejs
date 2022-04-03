@@ -1,0 +1,61 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar') %>
+
+<br>
+<br>
+<div class="container">
+  <% if(check == "show"){ %>
+  <h2>Inventories</h2>
+  <% }else if(check == "search"){ %>
+  <h2>Searched Inventory</h2>
+  <% }else if(check == "delete"){ %>
+  <h2>Deleted Inventory</h2>
+  <% } %>
+  <p>Type something in the input field to search the table for inventory:</p>  
+  <input class="form-control" id="myInput" type="text" placeholder="Search..">
+  <br>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Inventory ID</th>
+        <th>Inventory Name</th>
+        <th>Inventory Type</th>
+        <th>Cost</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody id="myTable">
+        <% all_stocks.forEach(function(element){
+            %>
+      <tr>
+        <td><%=element["id"]%></td>
+        <td><%=element["name"]%></td>
+        <td><%=element["type"]%></td>
+        <td><%="Rs" + element["price"]%></td>
+        <td><%=element["values"]%></td>
+      </tr>
+    <%
+})
+    %>
+    </tbody>
+  </table>
+</div>
+<br>
+<div class="container">
+    <a class="btn btn-light btn-lg" href="/logout" role="button">Log Out</a>
+    <a class="btn btn-dark btn-lg" href="/apiList" role="button">Back</a>
+</div>
+<br>
+<br>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+<%- include('partials/footer') %>
